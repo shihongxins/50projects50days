@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expanding Cards</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      place-items: center;
+      place-content: center;
+    }
+    .cards-container {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: 90%;
+      height: 90%;
+      display: flex;
+      counter-reset: cardorder;
+    }
+    .cards-container .card {
+      flex: 1;
+      border-radius: 50px;
+      background-size: cover;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: all 1s ease-out;
+    }
+    .cards-container .card::after {
+      counter-increment: cardorder;
+      content: "Card " counter(cardorder, upper-roman);
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: deepskyblue;
+      opacity: 0;
+      transition: opacity 1s ease-out;
+    }
+    .cards-container .card + .card {
+      margin-left: 20px;
+    }
+    .cards-container .card.expanding {
+      flex: 10;
+    }
+    .cards-container .card.expanding::after {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <ul class="cards-container">
+    <li class="card expanding" style="background-image: url('https://source.unsplash.com/800x0/?code,coding');">
+    </li>
+    <li class="card" style="background-image: url('https://source.unsplash.com/900x0/?code,coding');">
+    </li>
+    <li class="card" style="background-image: url('https://source.unsplash.com/1000x0/?code,coding');">
+    </li>
+    <li class="card" style="background-image: url('https://source.unsplash.com/1100x0/?code,coding');">
+    </li>
+    <li class="card" style="background-image: url('https://source.unsplash.com/1200x0/?code,coding');">
+    </li>
+  </ul>
+  <script>
+    document.querySelector(".cards-container").addEventListener("click", function(e) {
+      const container = e.currentTarget || this;
+      const cards = container.children;
+      const clickedCard = e.target || e.srcElement;
+      [].forEach.call(cards, (card) => card.classList.remove("expanding"));
+      clickedCard.classList.add("expanding");
+    });
+  </script>
+</body>
+</html>
