@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidden Search Widget</title>
+  <script src="https://kit.fontawesome.com/de6756d9ab.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: lightpink;
+      display: flex;
+      place-content: center;
+      place-items: center;
+    }
+    .search {
+      display: inline-block;
+      border-radius: 20px;
+      box-shadow: 0 0 4px orangered;
+      overflow: hidden;
+      /* 清除容器内部行内元素间的空白字符 */
+      font-size: 0;
+      color: #333;
+      background-color: #fff;
+      cursor: pointer;
+    }
+    .search i,
+    .search input {
+      outline: none;
+      border: none;
+      padding: 0;
+      width: 0;
+      /* 通过设置 height=line-height=固定值 保证单行文字居中 */
+      height: 40px;
+      line-height: 40px;
+      font-size: 20px;
+      transition: all .5s ease;
+    }
+    .search i {
+      width: 40px;
+      text-align: center;
+      color: #666;
+    }
+    /* 输入框聚焦时 设置宽度 */
+    .search input:focus {
+      padding: 0 8px;
+      width: 150px;
+    }
+    .search input:focus + i {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <label class="search">
+    <input type="text" placeholder="Search...">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </label>
+</body>
+</html>
