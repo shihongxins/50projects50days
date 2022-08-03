@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blurry Loading</title>
+  <style>
+    .loading-blurry {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 999;
+      display: flex;
+      place-content: center;
+      place-items: center;
+      /* 
+        ❗❗❗loading 初始值变量
+        不用 attr(<attribute-name>) 函数的原因是， attr 函数值仅能作用于 content: 中，
+        因此用变量 和 var(<custom-property-name>, <declaration-value>) 函数代替。
+      */
+      --loading-value: 0;
+    }
+    /* 用 ::before 伪元素展示背景图 */
+    .loading-blurry::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* 置于底层防止挡住文字 */
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background: url("https://source.unsplash.com/random/1920*0/?Alps") center center/cover;
+      /* ❗❗❗ 模糊滤镜：范围由 33px - 0px */
+      filter: blur(calc((100 - var(--loading-value, 0)) / 3 * 1px));
+    }
+    /* 用 ::after 伪元素显示进度文字 */
+    .loading-blurry::after {
+      /*
+        ❗❗❗ CSS 中 var(<custom-property-name>, <declaration-value>) 函数不能用于 content: 中 
+        但可以先通过 counter-reset: <counter-ident> var(<custom-property-name>, <declaration-value>); 设置计数器变量值；
+        然后通过 counter(<counter-ident>, <counter-style>) 函数设置 content: 值。
+        参考：https://www.zhangxinxu.com/wordpress/2019/05/content-css-var/
+      */
+      counter-reset: loadingValue var(--loading-value, 0);
+      content: counter(loadingValue)"%";
+      font-size: 50px;
+      font-weight: 600;
+      color: #eee;
+      /* ❗❗❗ 文字透明度：范围 1 - 0 */
+      opacity: calc(1 - var(--loading-value, 0) / 100);
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-blurry"></div>
+  <script src="../utils/index.js"></script>
+  <script>
+    (function() {
+      const loading = document.querySelector(".loading-blurry");
+      let value = +loading.style.getPropertyValue("--loading-value");
+      const timer = setInterval(() => {
+        value++;
+        if (value > 99) {
+          clearInterval(timer);
+        }
+        loading.style.setProperty("--loading-value", value);
+      }, 30);
+    })();
+  </script>
+</body>
+</html>
