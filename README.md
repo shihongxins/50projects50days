@@ -9,3 +9,4 @@
 |04|[Hidden Search Widget](https://github.com/shihongxins/50projects50days/tree/main/04-Hidden-Search-Widget)|[Live Demo](https://shihongxins.github.io/50projects50days/04-Hidden-Search-Widget/)|
 |05|[Blurry Loading](https://github.com/shihongxins/50projects50days/tree/main/05-Blurry-Loading)|[Live Demo](https://shihongxins.github.io/50projects50days/05-Blurry-Loading/)|
 |06|[Scroll Animation](https://github.com/shihongxins/50projects50days/tree/main/06-Scroll-Animation)|[Live Demo](https://shihongxins.github.io/50projects50days/06-Scroll-Animation/)|
+|07|[Split Landing Page](https://github.com/shihongxins/50projects50days/tree/main/07-Split-Landing-Page)|[Live Demo](https://shihongxins.github.io/50projects50days/07-Split-Landing-Page/)|
