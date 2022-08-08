@@ -1,0 +1,130 @@
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Wave</title>
+  <style>
+    :root {
+      --theme-color-primary: skyblue;
+      --theme-color-secondary: lightblue;
+      --theme-color-text: #fff;
+    }
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: var(--theme-color-secondary);
+      color: var(--theme-color-text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    a,a:link,a:visited, a:hover,a:active {
+      color: inherit;
+      text-decoration: none;
+    }
+    .form-container {
+      border-radius: 4px;
+      padding: 40px;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .form-container h1 {
+      margin: 0 0 30px;
+      text-align: center;
+    }
+    .form-container fieldset {
+      margin: 30px 0;
+      border: none;
+      padding: 0;
+      position: relative;
+    }
+    .form-container input {
+      display: block;
+      outline: none;
+      border: none;
+      border-bottom: 2px solid var(--theme-color-text);
+      /* ❗ IOS 下： input 默认有圆角 */
+      border-radius: 0;
+      padding: 0;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      font-size: 16px;
+      background-color: transparent;
+      color: var(--theme-color-text);
+    }
+    .form-container label {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+    .form-container label span {
+      /* ❗ transform 对除非替换内联元素，表格列，表格列组 之外的盒模型元素生效，因此此处需要将 span 设置为 inline-block */
+      display: inline-block;
+      min-width: 5px;
+      /* ❗ 过渡效果中的动画速率，可以由函数表示 */
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .form-container input:focus,
+    /* ❗ 为防止输入信息后失焦，文字回落遮挡输入内容，需要添加 :valid 验证，但不能使用 :not(:empty) 验证 input 是否有值，因为 input 替换元素始终未 void */
+    .form-container input:valid {
+      border-color: var(--theme-color-primary);
+    }
+    /* ❗ 相邻元素选择器 + ~ ：只能选择后续节点 */
+    .form-container input:focus ~ label span,
+    .form-container input:valid ~ label span {
+      transform: translateY(-30px);
+      color: var(--theme-color-primary);
+    }
+    .form-container button {
+      display: block;
+      outline: none;
+      border: none;
+      border-radius: 4px;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      background-color: var(--theme-color-secondary);
+      color: var(--theme-color-text);
+      cursor: pointer;
+    }
+    .form-container button:hover {
+      background-color: var(--theme-color-primary);
+    }
+    .form-container p a {
+      color: var(--theme-color-primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Plese Login</h1>
+    <form>
+      <fieldset>
+        <input type="text" required>
+        <label>Email</label>
+      </fieldset>
+      <fieldset>
+        <input type="password" required>
+        <label>Password</label>
+      </fieldset>
+      <fieldset>
+        <button>Login</button>
+      </fieldset>
+    </form>
+    <p>Don't have an account? <a href="">Register</a></p>
+  </div>
+  <script>
+    (function () {
+      let labels = document.querySelectorAll("label");
+      labels.forEach((label) => {
+        label.innerHTML = label.innerText.split("").map((letter, index) => {
+          return `<span style="transition-delay: ${index * 0.1}s">${letter}</span>`;
+        }).join("");
+      });
+    })();
+  </script>
+</body>
+</html>
