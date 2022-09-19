@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一言</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: lightskyblue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    a,
+    a:link,
+    a:visited,
+    a:hover,
+    a:active {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    section {
+      border-radius: 10px;
+      padding: 50px 20px;
+      width: 40vw;
+      background-color: #fff;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    section h3 {
+      margin: 0;
+      color: gray;
+    }
+
+    section article {
+      width: 100%;
+      line-height: 40px;
+      font-size: 30px;
+      text-align: center;
+    }
+
+    section article p {
+      min-width: 600px;
+    }
+
+    section article p:first-child {
+      text-align: start;
+      text-indent: 2em;
+    }
+
+    section article p:last-child {
+      text-align: end;
+    }
+
+    section button {
+      border: none;
+      border-radius: 10px;
+      padding: 14px 40px;
+      background-color: deepskyblue;
+      box-shadow: 0 5px 15px rgb(0 0 0 / 10%), 0 6px 6px rgb(0 0 0 / 10%);
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+
+<body>
+  <section>
+    <h3>一言</h3>
+    <article></article>
+    <button onclick="generateHitokoto()">换一句</button>
+  </section>
+  <script>
+    const types = {
+      a: "动画",
+      b: "漫画",
+      c: "游戏",
+      d: "文学",
+      e: "原创",
+      f: "来自网络",
+      g: "其他",
+      h: "影视",
+      i: "诗词",
+      j: "网易云",
+      k: "哲学",
+      l: "抖机灵",
+    }
+    const article = document.querySelector("article");
+    async function generateHitokoto() {
+      article.innerHTML = "加载中 ..."
+      fetch(`//v1.hitokoto.cn?encode=json`).then((response) => response.json()).then((data) => {
+        return `
+          <a href="//hitokoto.cn/?uuid=${data.uuid}" target="_blank">
+            <p>${data.hitokoto}</p>
+            <p>—— 『 ${types[data.type]} <b>·</b> ${data.from} <b>·</b> ${data.from_who} 』 </p>
+          </a>
+        `;
+      }).then((html) => {
+        article.innerHTML = html
+      })
+    }
+    generateHitokoto();
+  </script>
+</body>
+
+</html>
