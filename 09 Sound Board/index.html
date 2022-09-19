@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sound Borad</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: lightskyblue;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      margin: 1rem;
+      border-radius: 0.25rem;
+      border: none;
+      padding: 1.5rem 3rem;
+      font-size: 1.2rem;
+      background-color: deepskyblue;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+    <audio id="applause" src="https://50projects50days.com/projects/sound-board/sounds/applause.mp3"></audio>
+    <audio id="boo" src="https://50projects50days.com/projects/sound-board/sounds/boo.mp3"></audio>
+    <audio id="gasp" src="https://50projects50days.com/projects/sound-board/sounds/gasp.mp3"></audio>
+    <audio id="tada" src="https://50projects50days.com/projects/sound-board/sounds/tada.mp3"></audio>
+    <audio id="victory" src="https://50projects50days.com/projects/sound-board/sounds/victory.mp3"></audio>
+    <audio id="wrong" src="https://50projects50days.com/projects/sound-board/sounds/wrong.mp3"></audio>
+  <div class="controls">
+    <button>applause</button>
+    <button>boo</button>
+    <button>gasp</button>
+    <button>tada</button>
+    <button>victory</button>
+    <button>wrong</button>
+  </div>
+
+  <script>
+    document.querySelector(".controls").addEventListener("click", (e) => {
+      const btn = e.target;
+      const sound = btn.innerText.trim();
+      if (btn.tagName === "BUTTON" && sound) {
+        playSound(sound);
+      }
+    });
+    const sounds = document.querySelectorAll("audio");
+    function playSound(soundID) {
+      sounds.forEach((sound) => {
+        if (sound.id !== soundID) {
+          sound.pause();
+          sound.currentTime = 0;
+        } else {
+          sound.play();
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
