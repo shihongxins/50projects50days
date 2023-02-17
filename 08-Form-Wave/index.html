@@ -68,7 +68,7 @@
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
     .form-container input:focus,
-    /* ❗ 为防止输入信息后失焦，文字回落遮挡输入内容，需要添加 :valid 验证，但不能使用 :not(:empty) 验证 input 是否有值，因为 input 替换元素始终未 void */
+    /* ❗ 为防止输入信息后失焦，文字回落遮挡输入内容，需要添加 :valid 验证，但不能使用 :not(:empty) 验证 input 是否有值，因为 input 替换元素始终为 void */
     .form-container input:valid {
       border-color: var(--theme-color-primary);
     }

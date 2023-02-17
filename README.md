@@ -1,5 +1,6 @@
 # 50 Projects in 50 Days - HTML/CSS and JavaScript
 ## [Origin Projects](https://github.com/bradtraversy/50projects50days)
+## [Knowledge](/Knowledge.md)
 
 |#|Project|Live Demo|
 |---|---|---|
@@ -11,5 +12,5 @@
 |06|[Scroll Animation](https://github.com/shihongxins/50projects50days/tree/main/06-Scroll-Animation)|[Live Demo](https://shihongxins.github.io/50projects50days/06-Scroll-Animation/)|
 |07|[Split Landing Page](https://github.com/shihongxins/50projects50days/tree/main/07-Split-Landing-Page)|[Live Demo](https://shihongxins.github.io/50projects50days/07-Split-Landing-Page/)|
 |08|[Form Wave](https://github.com/shihongxins/50projects50days/tree/main/08-Form-Wave)|[Live Demo](https://shihongxins.github.io/50projects50days/08-Form-Wave/)|
-|09|[Sound Borad](https://github.com/shihongxins/50projects50days/tree/main/09-Sound-Borad)|[Live Demo](https://shihongxins.github.io/50projects50days/09-Sound-Borad/)|
+|09|[Sound Board](https://github.com/shihongxins/50projects50days/tree/main/09-Sound-Board)|[Live Demo](https://shihongxins.github.io/50projects50days/09-Sound-Board/)|
 |10|[Hitokoto](https://github.com/shihongxins/50projects50days/tree/main/10-Hitokoto)|[Live Demo](https://shihongxins.github.io/50projects50days/10-Hitokoto/)|
