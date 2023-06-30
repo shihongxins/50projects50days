@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ Collapse</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #eee;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .QA-container {
+      margin: auto;
+      width: 600px;
+    }
+
+    .QA-item {
+      margin: 20px 0;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 30px;
+      overflow: hidden;
+      transition: all 0.5s ease;
+      background-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 3px 6px rgba(0, 255, 0, 0.1), 0 3px 6px rgba(0, 0, 255, 0.1);
+      position: relative;
+    }
+
+    .QA-item::before,
+    .QA-item::after {
+      display: inline-block;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font: var(--fa-font-regular);
+      content: "\f075";
+      font-size: 7em;
+      color: lightgreen;
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      z-index: -1;
+    }
+
+    .QA-item::after {
+      color: lightblue;
+      top: 0;
+      left: -20px;
+      transform: rotateY(180deg);
+    }
+
+    .QA-item h3 {
+      margin: 0;
+      padding: 0 2.5em 0 0;
+    }
+
+    .QA-item .btn-collapse {
+      border: none;
+      padding: 0;
+      background: none;
+      cursor: pointer;
+      position: absolute;
+      top: 30px;
+      right: 30px;
+    }
+
+    .QA-item .btn-collapse::before {
+      display: inline-block;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font: var(--fa-font-solid);
+      content: "\f057";
+      font-size: 2em;
+    }
+
+    .QA-item.collapsed {
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .QA-item.collapsed::before,
+    .QA-item.collapsed::after {
+      display: none;
+    }
+
+    .QA-item.collapsed p {
+      display: none;
+    }
+
+    .QA-item.collapsed .btn-collapse::before {
+      content: "\f078";
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1>Frequently Asked Questions</h1>
+  <main class="QA-container">
+  </main>
+  <template id="QA-template">
+    <section class="QA-item collapsed">
+      <h3>{{question}}</h3>
+      <p>{{answer}}</p>
+      <button class="btn-collapse"></button>
+    </section>
+  </template>
+  <script>
+    (() => {
+      const QAList = [
+        {
+          question: "Why shouldn't we trust atoms?",
+          answer: "They make up everything",
+        },
+        {
+          question: "What do you call someone with no body and no nose?",
+          answer: "Nobody knows.",
+        },
+        {
+          question: "What's the object-oriented way to become wealthy?",
+          answer: "Inheritance.",
+        },
+        {
+          question: "How many tickles does it take to tickle an octopus?",
+          answer: "Ten-tickles!",
+        },
+        {
+          question: "What is: 1 + 1?",
+          answer: "Depends on who are you asking.",
+        },
+      ];
+      const QAContainer = document.querySelector(".QA-container");
+      const QATemplate = document.querySelector("#QA-template");
+      const fragment = new DocumentFragment();
+      QAList.forEach((QA) => {
+        const item = document.createElement("section");
+        item.innerHTML = QATemplate.innerHTML.replace(/{{(.*)}}/g, (m, p) => {
+          const property = p.trim();
+          const value = QA[property];
+          if (property === "" || value === void (0)) {
+            return m;
+          }
+          return value;
+        });
+        fragment.appendChild(item);
+      });
+      QAContainer.appendChild(fragment);
+      QAContainer.addEventListener("click", (ev) => {
+        if (ev.target.tagName === "BUTTON" && ev.target.className === "btn-collapse") {
+          ev.target.parentElement.classList.toggle("collapsed")
+        }
+      });
+    })();
+  </script>
+  <script src="https://kit.fontawesome.com/de6756d9ab.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

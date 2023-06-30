@@ -15,3 +15,4 @@
 |09|[Sound Board](https://github.com/shihongxins/50projects50days/tree/main/09-Sound-Board)|[Live Demo](https://shihongxins.github.io/50projects50days/09-Sound-Board/)|
 |10|[Hitokoto](https://github.com/shihongxins/50projects50days/tree/main/10-Hitokoto)|[Live Demo](https://shihongxins.github.io/50projects50days/10-Hitokoto/)|
 |11|[Event Keycodes](https://github.com/shihongxins/50projects50days/tree/main/11-Event-Keycodes)|[Live Demo](https://shihongxins.github.io/50projects50days/11-Event-Keycodes/)|
+|12|[FAQ Collapse](https://github.com/shihongxins/50projects50days/tree/main/11-FAQ-Collapse)|[Live Demo](https://shihongxins.github.io/50projects50days/11-FAQ-Collapse/)|
