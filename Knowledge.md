@@ -70,3 +70,31 @@
 ### [08-Form-Wave](/50projects50days/08-Form-Wave/)
 + `transform` 对内联元素 `inline` ，表格列，表格列组无效
 + 不能通过 `input:not(:empty)` 判断 `input` 元素是否有值，因为它是替换元素始终为 `void` 而应该通过 `:valid` 判断
+
+### [11-Event-Keycodes](/50projects50days/11-Event-Keycodes/)
++ `String.prototype.replace(substr|pattern, newSubstr|function)`
+  + 第一个参数为 `substr: string` 时，仅替换第一个匹配项；
+  + 第一个参数为 `pattern: RegExp` 时，如果不带全局标识 `g`, 也只替换第一个匹配项，当带有全局标识 `g` 后，替换所有匹配项；
+  + 第二个参数为 `newSubstr: string` 时
+    + 如果第一项为 `substr: string` 直接替换；
+    + 如果第一项为 `pattern: RegExp` 时，可在 `newSubstr: string` 中通过*特殊变量*获取匹配字符串中的*特殊值*，如 `$$,$&,$n,$``,$',$name` 等；
+  + 第二个参数为 `function` 时，可通过参数 `match, p1, p1, ..., offset, string` 更精确控制替换值；
++ `String.prototype.replaceAll(substr|pattern, newSubstr|function)`
+  + 第一个参数为 `substr: string` 时，替换所有匹配项；
+  + 第一个参数为 `pattern: RegExp` 时，*必须*带全局标识 `g`；
+  + 第二个参数同 `String.prototype.replace(substr|pattern, newSubstr|function)`
+
++ `DocumentFragment` 文档片段可直接插入某节点，它继承于 `Node` ；
+```js
+  // const fragment = new DocumentFragment();
+  const fragment = new DocumentFragment();
+  fragment.append("1");
+  fragment.appendChild(document.createTextNode("2"));
+  document.body.appendChild(fragment);
+```
+
++ 操作 DOM 时，注意区分 `Node, Element`
+  + 大多数 DOM API 都会继承 `Node` ，如 `Element, Attr, CharacterData(Text, Comment, CDATAString), DocumentType, DocumentFragment` 等，因此它的属性和方法兼容性较好，但由于它的子节点类型众多，有可能通过某些属性获得非预期结果或 `null` ，或者抛出异常（如将某节点插入不支持子节点的节点）；
+  + `Node` 的属性及方法数量和名称都较少且命名清晰，容易记忆，常用属性和方法大部分含有 node 或 child 字样；
+  + `Element` 继承于 `Node` ，除了拥有 `Node` 的方法外，还扩展了其他方法，比较杂乱，且兼容性不一致，常用属性和方法大部分含有 children 或 element 字样，另外扩展的元素节点操作方法大部分仅含有操作方式单词如 `after(), append(), before(), prepend(), remove()`
+

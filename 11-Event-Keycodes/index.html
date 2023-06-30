@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Keycodes</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .container {
+      height: 100vh;
+      background: #ccc;
+      display: flex;
+      place-content: center;
+      place-items: center;
+    }
+
+    .item {
+      margin: 10px;
+      border: 1px solid #666;
+      padding: 20px;
+      min-width: 150px;
+      font-weight: bold;
+      text-align: center;
+      background: #eee;
+      position: relative;
+    }
+    .item small {
+      position: absolute;
+      top: -1.5em;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: normal;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <div class="item">
+      Press any key to get the keyCode
+    </div>
+  </main>
+  <template id="item-template">
+    <div class="item">
+      <small>event.key</small>
+      {{ key }}
+    </div>
+    <div class="item">
+      <small>event.code</small>
+      {{ code }}
+    </div>
+    <div class="item">
+      <small>event.keyCode</small>
+      {{ keyCode }}
+    </div>
+  </template>
+  <script>
+    (() => {
+      let container = document.querySelector(".container");
+      let itemTemplate = document.querySelector("#item-template");
+      document.addEventListener("keydown", (ev) => {
+        container.innerHTML = itemTemplate.innerHTML.replace(/{{(.*)}}/g, (m, p) => {
+          const property = p.trim();
+          const value = ev[property];
+          if (property === "" || value === void(0)) {
+            return m;
+          }
+          if (property === "key" && value === " ") {
+            return "Space";
+          }
+          return value;
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>
