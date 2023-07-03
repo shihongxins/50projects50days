@@ -98,3 +98,27 @@
   + `Node` 的属性及方法数量和名称都较少且命名清晰，容易记忆，常用属性和方法大部分含有 node 或 child 字样；
   + `Element` 继承于 `Node` ，除了拥有 `Node` 的方法外，还扩展了其他方法，比较杂乱，且兼容性不一致，常用属性和方法大部分含有 children 或 element 字样，另外扩展的元素节点操作方法大部分仅含有操作方式单词如 `after(), append(), before(), prepend(), remove()`
 
+### [13-Random-Choice-Picker](/50projects50days/13-Random-Choice-Picker/)
++ HTML 中给元素绑定事件的方法有
+  + 方式一，直接在标签上设置属性如，`<button onclick="alert('Hello World')">Say</button>` ，注意值是**方法/代码的调用执行**，不能仅是事件句柄（方法名）；
+  + 通过 API 给元素添加事件监听如
+  ```js
+    function say() {
+      alert("Hello World");
+    }
+    const button = document.querySelector("button");
+    // 方式二，直接给 DOM 元素的属性绑定事件句柄（方法名），此时不能为方法或代码的调用执行，否则在绑定时就立即执行了，后续手动无法触发；
+    /*
+    button.onclick = say;
+    */
+    // 方式三，通过 API 给元素添加事件监听
+    button.addEventListener("click", say);
+  ```
+  + 三种方式的总结
+    + 方式一： HTML 与 JavaScript 耦合严重，不利于方法复用；
+    + 方式二：虽解耦了 HTML 与 JavaScript ，但同类事件仅能绑定一个方法，如都给 `onclick` 属性赋值为 `say1,say2` 方法，最后 `say2` 会覆盖 `say1` ；
+    + 方法三：灵活的给元素添加事件监听，并能通过第三个参数 `useCapture|options` 方便的控制 DOM 事件；
+      + `useCapture: boolean = false` 控制事件是否在捕获阶段响应；
+      + `options: { capture: false, once: false, passive: false }` 根详细的控制事件捕获阶段响应、仅执行一次、是否*禁止*阻止默认事件
+      + 能通过此 API 给同类事件绑定多个方法；
+      + 能通过 `removeEventListener` 取消事件监听；

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Choice Picker</title>
+  <style>
+    body {
+      margin: 0;
+      background: lightblue;
+    }
+
+    main {
+      margin: auto;
+      height: 100vh;
+      width: 600px;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 200px;
+      resize: vertical;
+    }
+
+    .container {
+      margin: 10px 0;
+      padding: 0;
+      list-style: none;
+      width: 100%;
+      display: flex;
+      flex-flow: row wrap;
+    }
+
+    .container li {
+      margin: 5px 5px 0 0;
+      padding: 10px 20px;
+      border-radius: 20px;
+      background: orange;
+    }
+
+    .container li.picked {
+      background: orangered;
+    }
+
+    button {
+      margin: 0;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <main>
+    <p>Enter all of the choices divided by a comma (',').<br>
+      Press enter when you're done</p>
+    <textarea placeholder="Enter choices here..."></textarea>
+    <ul class="container"></ul>
+    <button onclick="ChoicePicker.randomSelect()">Retry</button>
+  </main>
+  <script>
+    const ChoicePicker = (() => {
+      const container = document.querySelector(".container");
+      const textarea = document.querySelector("textarea");
+      textarea.addEventListener("keyup", (ev) => {
+        if (ev.key === "Enter") {
+          textarea.value = "";
+          randomSelect();
+          ev.preventDefault();
+          return;
+        }
+        const fragment = new DocumentFragment();
+        textarea.value.split(",").forEach((item) => {
+          item = item.trim();
+          if (item) {
+            const li = document.createElement("li");
+            li.innerText = item;
+            fragment.appendChild(li);
+          }
+        });
+        container.replaceChildren(fragment);
+      });
+      function randomSelect() {
+        const len = container.children.length;
+        const interval = setInterval(() => {
+          const lastPicked = container.querySelector(".picked");
+          if (lastPicked) {
+            lastPicked.classList.remove("picked");
+          }
+          const randomIndex = Math.floor(Math.random() * len);
+          container.children.item(randomIndex).classList.add("picked");
+        }, 100);
+        setTimeout(() => {
+          clearInterval(interval);
+        }, Math.min(20, len) * 100);
+      }
+      return {
+        randomSelect
+      }
+    })();
+  </script>
+</body>
+
+</html>
