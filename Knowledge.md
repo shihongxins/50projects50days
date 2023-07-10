@@ -122,3 +122,39 @@
       + `options: { capture: false, once: false, passive: false }` 根详细的控制事件捕获阶段响应、仅执行一次、是否*禁止*阻止默认事件
       + 能通过此 API 给同类事件绑定多个方法；
       + 能通过 `removeEventListener` 取消事件监听；
+
+### [14-Animated-Navigation](/50projects50days/14-Animated-Navigation/)
++ 撞色背景
+  ```css
+    body {
+      background-color: lightskyblue;
+      background-image: linear-gradient(to bottom, lightskyblue 50%, lightgreen 50%);
+    }
+  ```
++ 宽度/高度的折叠/展开
+  + 最外层为固定值变化，如 80~350
+  + 中层为百分比变化，0%~100% ，并且变化后通过 `opacity/overflow` 隐藏内容
+  + 最里层的项目可添加其他过渡效果
++ CSS 制作 ＝ 和 ✖ 
+  ```css
+    nav .nav-btn--close::before,
+    nav .nav-btn--close::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 5px;
+      width: 20px;
+      height: 2px;
+      background-color: lightskyblue;
+      transform: rotate(0deg) translateY(0);
+      transition: transform 0.6s linear;
+    }
+
+    nav.open .nav-btn--close::before {
+      transform: rotate(765deg) translateY(5.5px);
+    }
+
+    nav.open .nav-btn--close::after {
+      transform: rotate(-765deg) translateY(-5.5px);
+    }
+  ```

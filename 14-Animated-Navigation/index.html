@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Navigation</title>
+  <link rel="stylesheet" href="../style/debugger.css">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: lightskyblue;
+      background-image: linear-gradient(to bottom, lightskyblue 50%, lightgreen 50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    ul,
+    li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      color: initial;
+      text-decoration: none;
+    }
+
+    nav {
+      box-sizing: border-box;
+      border-radius: 4px;
+      padding: 20px;
+      width: 80px;
+      overflow: hidden auto;
+      background-color: #fff;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+      transition: width 0.6s linear;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    nav ul {
+      width: 0;
+      /* overflow 代替 opacity 过渡 */
+      overflow: hidden;
+      /* opacity: 0; */
+      transition: width 0.6s linear;
+      display: flex;
+    }
+
+    nav ul .nav-item {
+      transform: rotateY(0deg);
+      transition: transform 0.6s linear;
+    }
+
+
+    nav ul .nav-item a {
+      padding: 10px;
+    }
+
+    nav .nav-btn--close {
+      border: none;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      position: relative;
+      cursor: pointer;
+    }
+
+    nav .nav-btn--close::before,
+    nav .nav-btn--close::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 5px;
+      width: 20px;
+      height: 2px;
+      background-color: lightskyblue;
+      transform: rotate(0deg) translateY(0);
+      transition: transform 0.6s linear;
+    }
+
+    nav .nav-btn--close::after {
+      top: auto;
+      bottom: 10px;
+    }
+
+    nav.open {
+      width: 350px;
+    }
+
+    nav.open ul {
+      width: 100%;
+      /* opacity: 1; */
+    }
+
+    nav.open ul .nav-item {
+      transform: rotateY(360deg);
+    }
+
+    nav.open .nav-btn--close::before {
+      transform: rotate(765deg) translateY(5.5px);
+    }
+
+    nav.open .nav-btn--close::after {
+      transform: rotate(-765deg) translateY(-5.5px);
+    }
+
+  </style>
+</head>
+
+<body class="">
+  <nav class="open">
+    <ul>
+      <li class="nav-item"><a href="#">Home</a></li>
+      <li class="nav-item"><a href="#">Works</a></li>
+      <li class="nav-item"><a href="#">About</a></li>
+      <li class="nav-item"><a href="#">Contact</a></li>
+    </ul>
+    <button href="" class="nav-btn--close"></button>
+  </nav>
+
+  <script>
+    (() => {
+      const navBtnClose = document.querySelector("nav .nav-btn--close");
+      const nav = navBtnClose.parentElement;
+      navBtnClose.addEventListener("click", () => nav.classList.toggle("open"));
+    })();
+  </script>
+</body>
+
+</html>

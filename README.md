@@ -17,3 +17,4 @@
 |11|[Event Keycodes](https://github.com/shihongxins/50projects50days/tree/main/11-Event-Keycodes)|[Live Demo](https://shihongxins.github.io/50projects50days/11-Event-Keycodes/)|
 |12|[FAQ Collapse](https://github.com/shihongxins/50projects50days/tree/main/12-FAQ-Collapse)|[Live Demo](https://shihongxins.github.io/50projects50days/12-FAQ-Collapse/)|
 |13|[Random Choice Picker](https://github.com/shihongxins/50projects50days/tree/main/13-Random-Choice-Picker)|[Live Demo](https://shihongxins.github.io/50projects50days/13-Random-Choice-Picker/)|
+|14|[Animated Navigation](https://github.com/shihongxins/50projects50days/tree/main/13-Animated-Navigation)|[Live Demo](https://shihongxins.github.io/50projects50days/13-Animated-Navigation/)|

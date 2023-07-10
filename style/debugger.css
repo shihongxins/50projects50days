@@ -1,0 +1,12 @@
+.debugger *,
+.debugger *::before,
+.debugger *::after {
+  outline: 0.5px dashed;
+  outline-offset: 0.5px;
+}
+
+.debugger *:hover,
+.debugger *:active,
+.debugger *:focus {
+  outline-color: orangered;
+}
