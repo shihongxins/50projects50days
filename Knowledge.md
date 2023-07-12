@@ -158,3 +158,22 @@
       transform: rotate(-765deg) translateY(-5.5px);
     }
   ```
+
+### [15-Increment-Counter](/50projects50days/15-Increment-Counter/)
++ 字体使用
+  + Font Awesome
+    + 注册账户，生成 kit
+    + 设置 kit 的字体
+    + 页面引入 `<script src="https://kit.fontawesome.com/${kit}.js" crossorigin="anonymous"></script>`
+    + 使用字体图标 `<i class="fa-solid fa-3x fa-heart"></i>`
+  + Google Fonts
+    + 页面引入 `<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono|Noto+Sans+Chinese&display=swap">`
+      + 其中 `family` 参数格式为 `name:weight,style|name:weight,style...`
+      + 其中 `display` 指 `font-display`
+      + 如果只有有限个文字字符需要特殊字体，可添加 `text=abc...` 表明需要的字符，可极大减少字体文件大小；
+    + 对元素设置字体 `font-family`
++ JavaScript 动画
+  + 一般情况，使用 CSS `transition` 和 `animation` 实现的动画性能更好，但有些情况不得不使用 JavaScript 修改属性、样式实现其他动画；
+  + JavaScript 动画可以使用 `setTimeout, setInterval, requestAnimationFrame` 这三个 BOM API 重复执行函数来形成动画效果
+    + 差异：前两者需要手动控制动画执行间隔，间隔太小执行动画频率太快耗费性能，间隔太大执行动画频率太慢动画不流畅；后者由浏览器和系统结合硬件自动判断在空闲时执行动画，使动画效果和性能达到合适水平；
+    + 共同：三者都有对应的 BOM API 结束执行，释放性能 `clearTimeout, clearInterval, cancelAnimationFrame`；
