@@ -1,0 +1,199 @@
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>16 Drink Water</title>
+  <link rel="stylesheet" href="../style/debugger.css">
+  <style>
+    body {
+      --color-background: #3494e4;
+      --color-border: #114fc5;
+      --color-water: #6ab3f8;
+      margin: 0;
+      background: var(--color-background);
+    }
+
+    main {
+      color: #fff;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+    }
+
+    .goal {
+      line-height: 30px;
+      text-transform: capitalize;
+    }
+
+    .goal input {
+      border: none;
+      width: 40px;
+      height: 30px;
+      line-height: 30px;
+      background-color: rgba(0, 0, 0, .1);
+      color: inherit;
+      text-align: right;
+      font-size: inherit;
+    }
+
+    .cup {
+      border: 4px solid var(--color-border);
+      border-radius: 0 0 40px 40px;
+      width: 150px;
+      height: 330px;
+      overflow: hidden;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .cup .remained,
+    .cup .percentage {
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cup .remained {
+      flex: 1;
+      display: flex;
+      flex-flow: column;
+      background: #fff;
+      color: var(--color-water);
+    }
+
+    .cup .remained .liters {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .cup .percentage {
+      height: 0%;
+      background: var(--color-water);
+      color: var(--color-border);
+      font-size: 40px;
+      font-weight: bold;
+      transition: height 0.5s ease;
+    }
+
+    .cups {
+      width: 280px;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+    }
+
+    .cup.small {
+      margin: 5px;
+      border-radius: 0 0 15px 15px;
+      width: 50px;
+      height: 95px;
+      font-size: 14px;
+      background: #fff;
+      color: var(--color-water);
+      transition: all 0.5s ease;
+    }
+
+    .cup.small.full {
+      background: var(--color-water);
+      color: #fff;
+    }
+
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>Drink Water</h1>
+    <!-- You can change the goal at here -->
+    <h3 class="goal">
+      Goal: <input type="number" id="input-goal" value="2"> L, <input type="number" id="input-cup--count" value="8">
+      glasses
+    </h3>
+    <div class="cup">
+      <div class="remained">
+        <span class="liters">2 L</span>
+        <small>remained</small>
+      </div>
+      <div class="percentage"></div>
+    </div>
+    <p>Select how many glasses of water that you have drink.</p>
+    <div class="cups">
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const goal = document.querySelector(".goal");
+      const inputGoal = goal.querySelector("#input-goal");
+      const inputCupCount = goal.querySelector("#input-cup--count");
+      const elemRemainedLiter = document.querySelector(".cup .remained .liters");
+      const elemPercentage = document.querySelector(".cup .percentage");
+      const elemCupsContainer = document.querySelector(".cups");
+
+      let volGoal = parseInt(inputGoal.value) || 2;
+      let cupsCount = parseInt(inputCupCount.value) || 8;
+
+      const setCupRemain = (percentage = 1) => {
+        elemRemainedLiter.innerHTML = `${parseFloat((inputGoal.value * percentage).toFixed(2))} L`;
+        const percentageText = (percentage * 100).toFixed(0) + "%";
+        elemPercentage.style.height = percentageText;
+        elemPercentage.innerHTML = percentageText;
+      }
+
+      const handleChangeGoalOrCupCount = () => {
+        setCupRemain();
+        volGoal = parseInt(inputGoal.value) || 2;
+        cupsCount = parseInt(inputCupCount.value) || 8;
+        const volCupSmall = volGoal * 1000 / cupsCount;
+        const fragmentCupsContainer = document.createDocumentFragment();
+        for (let i = 0; i < cupsCount; i++) {
+          const elemCupSmall = document.createElement("div");
+          elemCupSmall.className = "cup small";
+          elemCupSmall.innerHTML = `${volCupSmall.toFixed(0)} ml`;
+          fragmentCupsContainer.appendChild(elemCupSmall);
+        }
+        elemCupsContainer.innerHTML = "";
+        elemCupsContainer.appendChild(fragmentCupsContainer);
+      }
+      [inputGoal, inputCupCount].forEach((input) => input.addEventListener("change", handleChangeGoalOrCupCount));
+      handleChangeGoalOrCupCount();
+
+      elemCupsContainer.addEventListener("click", (ev) => {
+        const cup = ev.target;
+        let cupIndex = cupsCount - 1;
+        if (cup.classList.contains("cup")) {
+          if (cupIndex === -1) {
+            return;
+          }
+          const lastCupIndex = elemCupsContainer.querySelectorAll(".full").length - 1;
+          for (let index = 0; index < cupsCount; index++) {
+            const elemCup = elemCupsContainer.children.item(index);
+            if (elemCup === cup) {
+              cupIndex = index;
+            }
+            if (index <= cupIndex) {
+              elemCup.classList.add("full");
+            } else {
+              elemCup.classList.remove("full");
+            }
+          }
+          if (cupIndex === lastCupIndex) {
+            cup.classList.toggle("full");
+            cupIndex--;
+          }
+          const percentage = 1 - (cupIndex + 1) / cupsCount;
+          setCupRemain(percentage);
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>

@@ -18,4 +18,5 @@
 |12|[FAQ Collapse](https://github.com/shihongxins/50projects50days/tree/main/12-FAQ-Collapse)|[Live Demo](https://shihongxins.github.io/50projects50days/12-FAQ-Collapse/)|
 |13|[Random Choice Picker](https://github.com/shihongxins/50projects50days/tree/main/13-Random-Choice-Picker)|[Live Demo](https://shihongxins.github.io/50projects50days/13-Random-Choice-Picker/)|
 |14|[Animated Navigation](https://github.com/shihongxins/50projects50days/tree/main/14-Animated-Navigation)|[Live Demo](https://shihongxins.github.io/50projects50days/14-Animated-Navigation/)|
-|15|[Increment Counter](https://github.com/shihongxins/50projects50days/tree/main/15-Increment-Counter)|[Live Demo](https://shihongxins.github.io/50projects50days/15-Increment-Navigation/)|
+|15|[Increment Counter](https://github.com/shihongxins/50projects50days/tree/main/15-Increment-Counter)|[Live Demo](https://shihongxins.github.io/50projects50days/15-Increment-Counter/)|
+|16|[Drink Water](https://github.com/shihongxins/50projects50days/tree/main/16-Drink-Water)|[Live Demo](https://shihongxins.github.io/50projects50days/16-Drink-Water/)|

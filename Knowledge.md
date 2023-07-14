@@ -177,3 +177,11 @@
   + JavaScript 动画可以使用 `setTimeout, setInterval, requestAnimationFrame` 这三个 BOM API 重复执行函数来形成动画效果
     + 差异：前两者需要手动控制动画执行间隔，间隔太小执行动画频率太快耗费性能，间隔太大执行动画频率太慢动画不流畅；后者由浏览器和系统结合硬件自动判断在空闲时执行动画，使动画效果和性能达到合适水平；
     + 共同：三者都有对应的 BOM API 结束执行，释放性能 `clearTimeout, clearInterval, cancelAnimationFrame`；
+
+### [16-Drink-Water](/50projects50days/16-Drink-Water/)
++ 类似 [05-Blurry-Loading] 既要显示百分比文字，又要将百分比值设置到其他属性上（如 `height, opacity` 等）时可以通过 `var, counter-reset, content` 三属性，即
+  + 定义 CSS 变量
+  + 通过 CSS 计数器获取 CSS 变量的值
+  + 通过 `content` 设置内容为 CSS 计数器的值
+  + 不使用 `attr` 的原因是， `attr` 仅能作用于伪元素的 `content` 属性，不能像 CSS 变量那样作用于其他属性；
+  + 但需要注意 CSS 计数器增量必须为**整数**， `counter-increment` 必须为整数；
